@@ -17,17 +17,18 @@ sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 open_ports = []
 
 def scan_ip():
+    '''Begin of scan with target IP and port range'''
     print(f"begin scan {target_ip} from {port_start} to {port_end}")
     for port in range(port_start, port_end+1):
         scan_port(port)
 
 
 def scan_port(port):
+    '''Scanning each port'''
     try:
         status = sock.connect_ex((target_ip, port))
         if status == 0:
             open_ports.append(port)
-        # return
     except:
         print("something else happened that cannot be handled")
 
@@ -66,17 +67,18 @@ try:
     elif sys.argv[1]=='-host' and args.host:
         target_ip = socket.gethostbyname(args.host)
 except OSError:
-    print("Unable to obtain information with that IP or host")
+    print("Unable to obtain information for that IP or host")
 else:
-    if sys.argv[1]=='-ip':
-        print(f"The hostname is: {host_data[0]} for IP: {target_ip}")
-    elif sys.argv[1]=='-host':
-        print(f"The IP address of {sys.argv[2]} is: {target_ip}")
+    # if sys.argv[1]=='-ip':
+    #     print(f"The hostname is: {host_data[0]} for IP: {target_ip}")
+    # elif sys.argv[1]=='-host':
+    #     print(f"The IP address of {sys.argv[2]} is: {target_ip}")
     port_start = args.start
     port_end = args.end
     scan_ip()
     if len(open_ports) == 0:
         print("no open ports")
     else:
-        print(open_ports)
+        for p in open_ports:
+            print(f"Port {p}: OPEN")
 
