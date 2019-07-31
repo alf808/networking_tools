@@ -1,20 +1,32 @@
 #!/usr/bin/python3
 '''This tool will scan for open ports on any domain or IP and return a report
 when completed.
-Usage:  ./port_scan.py -ip <IP>
-        ./port_scan.py -host <HOST>
-Sample: ./port_scan.py -ip 192.168.0.1
-        ./port_scan.py -host devleague.com
+Usage:  
+        ./port_scan.py -ip <IP> -start <PORT_START> -end <PORT_END>
+        ./port_scan.py -host <HOST> -start <PORT_START> -end <PORT_END>
+
+Sample:
+        ./port_scan.py -ip 192.168.0.1 -port 50 -end 200
+        ./port_scan.py -host devleague.com -port 3000 -end 5000
 '''
 import socket
 import argparse
 import sys
 
-def scan_ip(ip):
-    print(f"begin scan {ip}")
+def scan_ip(ip, start_port, end_port):
+    print(f"begin scan {ip} from {start_port} to {end_port}")
 
 
-if len(sys.argv) < 2 or len(sys.argv) > 3:
+def range_type(astr, min=0, max=65535):
+    '''verify if port is within range of 0 to 65535'''
+    value = int(astr)
+    if min<= value <= max:
+        return value
+    else:
+        raise argparse.ArgumentTypeError('value not in range %s-%s'%(min,max))
+
+
+if len(sys.argv) < 2 or len(sys.argv) > 7:
     sys.exit("too many or not enough arguments")
 
 parser = argparse.ArgumentParser(
@@ -22,9 +34,12 @@ parser = argparse.ArgumentParser(
     description="command line tool to scan ports of an IP or host"
 )
 
-parser.add_argument('-ip', help="IP must be valid")
-parser.add_argument('-host', help="Tool will attempt host name")
+group = parser.add_mutually_exclusive_group()
+group.add_argument('-ip', help="IP must be valid")
+group.add_argument('-host', help="Tool will attempt host name")
 
+parser.add_argument('-start', type=range_type, metavar="[0-65535]", help="starting port to scan")
+parser.add_argument('-end', type=range_type, metavar='[0-65535]', help="last port to scan")
 args = parser.parse_args()
 
 try:
@@ -41,6 +56,6 @@ else:
         print(f"The hostname is: {host_data[0]} for IP: {ip_data}")
     elif sys.argv[1]=='-host':
         print(f"The IP address of {sys.argv[2]} is: {ip_data}")
-    scan_ip(ip_data)
+    scan_ip(ip_data, args.start, args.end)
 
 
