@@ -16,7 +16,8 @@ args = parser.parse_args()
 
 try:
     socket.inet_aton(args.ip)
+    ip_info = socket.gethostbyaddr(args.ip)
 except OSError:
     print("valid IP please")
 else:
-    print(f"The hostname is: {socket.gethostbyaddr(args.ip)[0]} for IP: {socket.gethostbyaddr(args.ip)[2][0]}")
+    print(f"The hostname is: {ip_info[0]} for IP: {ip_info[2][0]}")
