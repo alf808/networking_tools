@@ -1,0 +1,42 @@
+The hostname is: dns.google for IP: 8.8.8.8
+duration of task: 0:00:05.078378
+The hostname is: dns.google for IP: 8.8.8.8
+duration of task: 0:00:05.073394
+2019-08-01 15:38:11.353656
+The hostname is: dns.google for IP: 8.8.8.8
+duration of task: 0:00:05.075021
+2019-08-01 15:42:00.209715
+The hostname is: dns.google for IP: 8.8.8.8
+duration of task: 0:00:05.070793
+2019-08-01 15:42:07.883292
+The hostname is: dns.google for IP: 8.8.8.8
+duration of task: 0:00:05.068743
+2019-08-01 15:55:35.372998
+The IP address of devleague.com is: 68.66.200.198
+duration of task: 0:00:05.074486
+2019-08-01 16:12:23.407565
+
+duration of task: 0:00:05.124664
+2019-08-01 16:16:08.066289
+10.0.2.43 no open ports
+duration of task: 0:00:06.178051
+2019-08-01 16:18:42.193617
+Port 111: OPEN
+
+duration of task: 0:00:05.175102
+2019-08-01 16:20:30.027158
+Port 111: OPEN
+
+duration of task: 0:00:05.156077
+2019-08-01 16:24:16.417830
+Port 111: OPEN
+
+duration of task: 0:00:05.163375
+2019-08-01 16:29:38.730837
+Port 111: OPEN
+
+duration of task: 0:00:05.172002
+2019-08-01 16:30:27.256312
+Port 111: OPEN
+
+duration of task: 0:00:05.147472
