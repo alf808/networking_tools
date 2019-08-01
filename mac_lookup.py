@@ -3,7 +3,7 @@
 Usage: ./mac_lookup.py <mac_address>
 Sample: ./mac_lookup.py 00:11:22:33:44:55
 '''
-import urllib2
+import urllib
 import json
 import codecs
 import argparse
@@ -18,13 +18,12 @@ args = parser.parse_args()
 
 mac_api_url = "http://macvendors.co/api/"
 
-request = urllib2.Request(mac_api_url + args.url, headers={'User-Agent' : "API Browser"}) 
-
-response = urllib2.urlopen( request )
-reader = codecs.getreader("utf-8")
-obj = json.load(reader(response))
-
-company =obj['result']['company']
-address =obj['result']['address']
-
-print(company.encode("ascii","replace"),address.encode("ascii","replace"))
+try:
+    req = urllib.request(mac_api_url + args.url, headers={'User-Agent' : "API Browser"}) 
+    response = urllib.urlopen(request)
+    reader = codecs.getreader("utf-8")
+    obj = json.load(reader(response))
+except:
+    print("oops")
+else:
+    print(obj)
