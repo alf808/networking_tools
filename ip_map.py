@@ -7,7 +7,13 @@ import socket
 import argparse
 import sys
 
-parser = argparse.ArgumentParser()
+if len(sys.argv) != 2:
+    sys.exit("too many or not enough arguments")
+    
+parser = argparse.ArgumentParser(
+    prog="Network Survival Kit",
+    description="command line tool to obtain IP from host"
+)
 
 parser.add_argument('host', help="mandatory host name")
 args = parser.parse_args()

@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 '''This tool will act as your client browswer to pull html from any domain.
-Usage: ./sys_info.py <URL>
-Sample: ./sys_info.py https://github.com
+Usage: ./client_browse.py <URL>
+Sample: ./client_browse.py https://github.com
 '''
 import socket
 import sys
@@ -34,7 +34,3 @@ Status-code: {code}
 {html}
     '''
     print(output)
-    # print(f"URL: {url}")
-    # print(f"Status-code: {code}")
-    # print(info)
-    # print(html)
