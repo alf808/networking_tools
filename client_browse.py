@@ -7,6 +7,13 @@ import socket
 import sys
 import argparse
 import urllib.request
+from datetime import datetime
+
+if len(sys.argv) > 2:
+    sys.exit("too many or not enough arguments")
+
+start = datetime.now()
+output = ""
 
 parser = argparse.ArgumentParser(
     prog="Network Survival Kit",
@@ -27,10 +34,14 @@ except urllib.error.URLError:
 except ValueError:
     print(r"Perhaps prefixation of 'http://' or 'https://' might help")
 else: 
-    output = f'''
+    output += f'''
 URL: {url}
 Status-code: {code}
 {info}
 {html}
     '''
+finally:
+    end = datetime.now()
+    duration = end - start
+    output += f"\nduration of task: {duration}"
     print(output)

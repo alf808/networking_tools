@@ -12,13 +12,20 @@ Sample:
 import socket
 import argparse
 import sys
+from datetime import datetime
 
+if len(sys.argv) < 2 or len(sys.argv) > 7:
+    sys.exit("too many or not enough arguments")
+
+start = datetime.now()
+output = ""
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 open_ports = []
 
+
 def scan_ip():
     '''Begin of scan with target IP and port range'''
-    print(f"begin scan {target_ip} from {port_start} to {port_end}")
+    print(f"scanning {target_ip} ports {port_start} to {port_end}")
     for port in range(port_start, port_end+1):
         scan_port(port)
 
@@ -42,9 +49,6 @@ def port_range(num, min=0, max=65535):
         raise argparse.ArgumentTypeError('value not in range %s-%s'%(min,max))
 
 
-if len(sys.argv) < 2 or len(sys.argv) > 7:
-    sys.exit("too many or not enough arguments")
-
 parser = argparse.ArgumentParser(
     prog="Network Survival Kit",
     description="command line tool to scan ports of an IP or host"
@@ -67,18 +71,18 @@ try:
     elif sys.argv[1]=='-host' and args.host:
         target_ip = socket.gethostbyname(args.host)
 except OSError:
-    print("Unable to obtain information for that IP or host")
+    print(f"Unable to obtain information for {sys.argv[2]}")
 else:
-    # if sys.argv[1]=='-ip':
-    #     print(f"The hostname is: {host_data[0]} for IP: {target_ip}")
-    # elif sys.argv[1]=='-host':
-    #     print(f"The IP address of {sys.argv[2]} is: {target_ip}")
     port_start = args.start
     port_end = args.end
     scan_ip()
     if len(open_ports) == 0:
-        print("no open ports")
+        output += f"{sys.argv[2]} no open ports"
     else:
         for p in open_ports:
-            print(f"Port {p}: OPEN")
-
+            output += f"Port {p}: OPEN\n"
+finally:
+    end = datetime.now()
+    duration = end - start
+    output += f"\nduration of task: {duration}"
+    print(output)

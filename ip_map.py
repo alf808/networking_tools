@@ -6,10 +6,14 @@ Sample: ./ip_map.py devleague.com
 import socket
 import argparse
 import sys
+from datetime import datetime
 
-if len(sys.argv) != 2:
+if len(sys.argv) > 2:
     sys.exit("too many or not enough arguments")
-    
+
+start = datetime.now()
+output = ""
+
 parser = argparse.ArgumentParser(
     prog="Network Survival Kit",
     description="command line tool to obtain IP from host"
@@ -25,4 +29,9 @@ try:
 except OSError:
     print("Unable to obtain IP with that hostname")
 else:
-    print(f"The IP address of {temp_host} is: {temp_ip}")
+    output += f"The IP address of {temp_host} is: {temp_ip}"
+finally:
+    end = datetime.now()
+    duration = end - start
+    output += f"\nduration of task: {duration}"
+    print(output)

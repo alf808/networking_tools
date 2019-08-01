@@ -5,6 +5,14 @@ Sample: ./sys_info.py 127.0.0.1
 '''
 import socket
 import argparse
+from datetime import datetime
+import sys
+
+if len(sys.argv) > 2:
+    sys.exit("too many or not enough arguments")
+
+start = datetime.now()
+output = ""
 
 parser = argparse.ArgumentParser(
     prog="Network Survival Kit",
@@ -20,4 +28,9 @@ try:
 except OSError:
     print("valid IP please")
 else:
-    print(f"The hostname is: {ip_info[0]} for IP: {ip_info[2][0]}")
+    output += f"The hostname is: {ip_info[0]} for IP: {ip_info[2][0]}"
+finally:
+    end = datetime.now()
+    duration = end - start
+    output += f"\nduration of task: {duration}"
+    print(output)

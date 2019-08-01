@@ -7,9 +7,13 @@ import urllib.request
 import json
 import argparse
 import sys
+from datetime import datetime
 
 if len(sys.argv) > 2:
     sys.exit("too many or not enough arguments")
+
+start = datetime.now()
+output = ""
 
 parser = argparse.ArgumentParser(
     prog="Network Survival Kit",
@@ -27,14 +31,17 @@ try:
         result = response.read().decode('utf-8')
     obj = json.loads(result)
 except:
-    print("dunno")
+    print("dunno what happened")
 else:
     try:
         company = obj['result']['company']
         address = obj['result']['address']
     except:
-        print("unrecognizable MAC address")
+        output += "unrecognizable MAC address"
     else:
-        output = f"company: {company}\naddress: {address}"
-        print(output)
-    
+        output += f"company: {company}\naddress: {address}"
+finally:
+    end = datetime.now()
+    duration = end - start
+    output += f"\nduration of task: {duration}"
+    print(output)
