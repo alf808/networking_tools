@@ -1,10 +1,10 @@
 # Basic Networking Tools
 
 ## Introduction
-standard network cli tools and applications
+standard network cli tools and importable applications
 
 ## Modules
-There 6 modules in this package:
+There are 6 modules in this package. Except for net_report.py, all of the modules can be run on the CLI or are importable in another script. If imported, the function getinfo() is used after the module name.
 * **sys_info**: tool to grab hostname of the target machine
 
         Usage: ./sys_info.py <IP>
