@@ -26,7 +26,7 @@ def getinfo(ip):
         net_report.scan_end()
         duration = net_report.show_duration()
         duration_txt = f"\nduration of task: {duration}"
-        net_report.collect(output)
+        net_report.collect(output + duration_txt)
         return output, duration_txt
 
 
