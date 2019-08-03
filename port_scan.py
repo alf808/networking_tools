@@ -27,7 +27,6 @@ def _scan_ip(port_start, port_end):
         try:
             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             sock.settimeout(10)
-            # print(f"scanning {port}")
             status = sock.connect_ex((target_ip, port))
             if status == 0:
                 open_ports.append(port)
@@ -36,32 +35,6 @@ def _scan_ip(port_start, port_end):
         finally:
             status = None
             sock.settimeout(None)
-
-
-# def _scan_port(port):
-#     '''Scanning each port'''
-#     global target_ip
-#     global sock
-#     try:
-#     status = sock.connect_ex((target_ip, port))
-#     if status == 0:
-#         print(f"{port}: {status}")
-#         open_ports.append(port)
-#         return True
-#     else:
-#         print(f"{port}: {status}")
-#         return False
-    # except:
-    #     print("something else happened that cannot be handled")
-    #     return False
-    # else:
-    #     if status == 0:
-    #         open_ports.append(port)
-    #         return True
-    #     else:
-    #         return False
-    # finally:
-    #     sock.shutdown()
 
 
 # the following code to help with look of choices=range error is based on link below
