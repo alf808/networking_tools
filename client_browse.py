@@ -25,11 +25,11 @@ def getinfo(ur):
         print(r"Perhaps prefixation of 'http://' or 'https://' might help")
     else: 
         output += f'''
-        URL: {url}
-        Status-code: {code}
-        {info}
-        {html}
-        '''
+URL: {url}
+Status-code: {code}
+{info}
+{html}
+'''
     finally:
         net_report.scan_end()
         duration = net_report.show_duration()
