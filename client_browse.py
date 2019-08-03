@@ -3,7 +3,6 @@
 Usage: ./client_browse.py <URL>
 Sample: ./client_browse.py https://github.com
 '''
-import socket
 import argparse
 import sys
 import urllib.request
