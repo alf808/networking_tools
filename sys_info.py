@@ -33,10 +33,7 @@ if __name__ == "__main__":
     if len(sys.argv) > 2:
         sys.exit("too many or not enough arguments")
 
-    parser = argparse.ArgumentParser(
-        prog="Network Survival Kit",
-        description="command line tool to convert IP to host"
-        )
+    parser = argparse.ArgumentParser(description="command line tool to convert IP to host")
 
     parser.add_argument('ip', help="mandatory IP address")
     args = parser.parse_args()
