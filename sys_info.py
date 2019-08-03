@@ -2,6 +2,8 @@
 '''This tool will grab the hostname of the target machine.
 Usage: ./sys_info.py <IP>
 Sample: ./sys_info.py 127.0.0.1
+To see how long the task completes, use the --verbose flag.
+        ./sys_info.py 127.0.0.1 --verbose
 '''
 import socket
 import sys
@@ -23,19 +25,23 @@ def getinfo(ip):
     finally:
         net_report.scan_end()
         duration = net_report.show_duration()
-        output += f"\nduration of task: {duration}"
+        duration_txt = f"\nduration of task: {duration}"
         net_report.collect(output)
-        return output
+        return output, duration_txt
 
 
 if __name__ == "__main__":
 
-    if len(sys.argv) > 2:
+    if len(sys.argv) > 3:
         sys.exit("too many or not enough arguments")
 
     parser = argparse.ArgumentParser(description="command line tool to convert IP to host")
 
     parser.add_argument('ip', help="mandatory IP address")
+    parser.add_argument('--verbose', help='output duration', action='store_true')
     args = parser.parse_args()
     ip_data = args.ip
-    print(getinfo(ip_data))
+    out, dur = getinfo(ip_data)
+    print(out)
+    if args.verbose:
+        print(dur)
